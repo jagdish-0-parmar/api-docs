@@ -150,8 +150,8 @@ components:
           description: Date and time when the metadata was last checked.
           format: date-time
           example: 2017-07-21T17:32:28Z
-    Atm:
-      description: The metadata for an ATM entity
+    ATM:
+      description: Cryptoasset ATMs also known as Automated Teller Machines, are self-service kiosks enabling individuals to buy or sell Bitcoin and other cryptocurrencies using cash or debit cards
       allOf:
         - $ref: '#/components/schemas/Entity'
         - type: object
@@ -196,24 +196,35 @@ components:
               description: Provides the URL or link to the source that confirms the country where the entity’s license was issued. This link serves as a reference for verification purposes.
               type: string
               example: https://source-link.com
-    Crim:
-      description: The metadata for a Criminal Enterprise entity
+    CRIM:
+      description: Criminal Enterprises category encompasses a broad spectrum of illicit activities conducted with the intention to gain profit or achieve some unlawful objectives. They are often organized and executed within the framework of larger criminal operations or networks.
       allOf:
         - $ref: '#/components/schemas/Entity'
         - type: object
           properties:
             tags:
-              description: Classifies the type or category of content associated with an entity, typically used for tagging or categorizing content related to criminal activities or disturbing material
+              description: Classifies the type or category of content associated with an entity.
               type: array
               items:
                 type: string
-                enum:
-                  - Violent Crimes
-                  - Exploitative and Coercive Crimes
-                  - Property and Financial Crimes
-                  - Substance Related Crimes
-                  - Morbid and Shock Content
-                  - Psychological and Emotional Crimes
+                oneOf:
+                - title: Violent Crimes
+                  description: (Assaults and Battery - Includes beatings, maiming, stabbing, breaking of bones, brutal attacks, muscular warnings.), (Homicide and Manslaughter - Encompasses activities like killings, torture, murder, executions, sniper jobs, assassination, making killings look like accidents.), (Sexual Offenses - Covers all instances of rape, necrophilia, incest, and other non-consensual sexual activities.)
+                  
+                - title: Exploitative and Coercive Crimes
+                  description: (Kidnapping and Abduction - Involves kidnapping, abductions, and related activities aimed at unlawfully detaining individuals.), (Blackmail and Extortion - Includes blackmail, threats, and extortion by exploiting victims' vulnerabilities.)
+                  
+                - title: Property and Financial Crimes
+                  description: (Theft and Burglary - Pertains to theft, burglary, plant robbery, and other forms of property theft.), (Arson and Damage - Encompasses arson, sabotage, damage to goods and properties, setting fires to homes or workplaces.), (Fraud and Cybercrime - Includes hacking (website, email, social media), DDoS attacks, grades changing, and other forms of deception and cyber attacks.)
+                  
+                - title: Substance Related Crimes
+                  description: (Drug Trafficking - Deals with the illegal trade and distribution of drugs like cannabis, ketamine, ecstasy, opioids, cocaine, speed.), (Illegal Arms Trafficking - Involves the sale and distribution of illegal firearms, explosives, grenades, sniper rifles.), (Controlled Substance Trafficking - "Purchasing research chemicals" could be categorized here, especially if these chemicals are intended for illegal use or are controlled substances.)
+                  
+                - title: Morbid and Shock Content
+                  description: (Gore and Snuff - Involves the distribution or creation of content showcasing real-life violence, death, and sexual violence.), (Extreme Fetishes - Encompasses activities related to extreme fetish, BDSM, bestiality, revenge porn, and other explicit or extreme content.)
+                  
+                - title: Psychological and Emotional Crimes
+                  description: (Torture and Cruelty - Includes all forms of physical and psychological torture, severe torture to death, and other cruel treatments.), (Ruination and Sabotage - Activities aimed at wrecking lives, bio attacks, paralyzing, depriving of vision, and other forms of personal sabotage.)
             osint:
               description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
               type: string
@@ -223,6 +234,775 @@ components:
               description: Identifies the origin or source from which the scam information about the entity was obtained. This could include reports, databases, user submissions, or other investigative sources.
               type: string
               example: https://source-link.com
+              
+    CEFI:
+      description: A financial system where traditional financial services (such as trading, lending, and borrowing) are managed by centralized entities or institutions. In CeFi, a trusted intermediary holds and controls the users’ funds and data, often requiring compliance with regulations like KYC and AML (Anti-Money Laundering).
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            tags:
+              description: Classifies the type or category of content associated with an entity.
+              type: array
+              items:
+                type: string
+                oneOf:
+                - title: Global Exchange
+                  description: A global exchange is a platform that operates without country-specific KYC policies, allowing individuals from various countries to register and engage in buying or selling cryptocurrencies.
+                  
+                - title: Regional Exchange
+                  description: A Regional Exchange is a platform restricted by country or region-specific KYC policies, available only to residents of a certain geographical area. It allows only these residents to buy or sell cryptocurrencies.
+                  
+                - title: Telegram Exchange
+                  description: A Telegram exchange is an exchange that operates some or all of its services on Telegram.
+                  
+                - title: On Off Ramp
+                  description: An on-off ramp is a platform or service within an exchange that enables users to buy and sell cryptocurrency using credit cards or bank transfers, without offering additional trading services like staking or crypto-only spot transactions.
+                  
+                - title: Instant Exchange
+                  description: An instant exchange service is a platform that allows its users to buy and sell cryptocurrencies with manual approval. It utilizes online payment methods like PayPal, Alipay, Wise, among others, as well as traditional payment options.
+                  
+                - title: OTC Desk
+                  description: An OTC desk is a platform or service on an exchange that involves high-volume trading to avoid market slippage and sometimes, it may require an upfront deposit.
+                  
+                - title: Swap Service
+                  description: A swap service in crypto exchanges enables instant, direct cryptocurrency conversions without using traditional order books, often leveraging liquidity pools.
+                  
+                - title: Centralized Bridge
+                  description: A centralized Bridge is a service managed by a central authority that facilitates the transfer of assets between different blockchain networks, providing ease of use but requiring trust in the central entity.
+                  
+                - title: P2P Exchange
+                  description: Centralized P2P services are platforms that facilitate direct cryptocurrency transactions between users but are managed and overseen by a central authority or company. While users trade directly with each other, the platform itself controls the escrow services, user verification, and dispute resolution.             
+                  
+            countryOfIncorporation:
+              description: Specifies the country where the entity is legally registered and incorporated. This information is used to identify the jurisdiction governing the entity’s legal status and operations.
+              type: string
+              example: US
+            countryOfIncorporationSourceLink:
+              description: Provides the URL or link to the source that verifies the country of incorporation for the entity. This link serves as a reference for the information provided.
+              type: string
+              example: https://source-link.com
+            kycNotes:
+              description: Additional information or observations related to the Know Your Customer (KYC) verification process for the entity. This may include specific details about the verification, exceptions, or any issues encountered.
+              type: string
+              example: note
+            kycVerification:
+              $ref: '#/components/schemas/KycVerification'
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string
+            supportedFiat:
+              description: List of supportedFiat.
+              type: array
+              items:
+                $ref: '#/components/schemas/SupportedFiatEnum'
+            isLicensed:
+              $ref: '#/components/schemas/IsLicensedEnum'
+            countryOfLicense:
+              description: Specifies the country in which the entity has obtained its operating license. This identifies the jurisdiction that governs the entity’s licensed activities.
+              type: string
+              example: US
+            countryOfLicenseSourceLink:
+              description: Provides the URL or link to the source that confirms the country where the entity’s license was issued. This link serves as a reference for verification purposes.
+              type: string
+              example: https://source-link.com
+            isScam:
+              $ref: '#/components/schemas/IsScamEnum'
+            scamSource:
+              description: Identifies the origin or source from which the scam information about the entity was obtained. This could include reports, databases, user submissions, or other investigative sources.
+              type: string
+              example: https://source-link.com
+              
+              
+    CUST:
+      description: Custodial Services refer to third-party providers that manage and safeguard cryptocurrency assets on behalf of their clients, holding the private keys and offering security and ease of access to the funds.
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            tags:
+              description: Classifies the type or category of content associated with an entity.
+              type: array
+              items:
+                type: string
+                oneOf:
+                - title: Bank
+                  description: Custodial Services refer to third-party providers that manage and safeguard cryptocurrency assets on behalf of their clients, holding the private keys and offering security and ease of access to the funds.
+                  
+                - title: Hybrid Custody
+                  description: Describes custodial solutions where both the user and the service provider share control over cryptocurrency assets, typically by splitting key management between the user and the provider. This form of custody balances user autonomy with additional security and backup support from the provider, allowing for flexibility in asset management without fully ceding control or security to a third party.
+                  
+            countryOfIncorporation:
+              description: Specifies the country where the entity is legally registered and incorporated. This information is used to identify the jurisdiction governing the entity’s legal status and operations.
+              type: string
+            countryOfIncorporationSourceLink:
+              description: Provides the URL or link to the source that verifies the country of incorporation for the entity. This link serves as a reference for the information provided.
+              type: string
+              example: https://source-link.com
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string
+            isLicensed:
+              $ref: '#/components/schemas/IsLicensedEnum'
+            countryOfLicense:
+              description: Specifies the country in which the entity has obtained its operating license. This identifies the jurisdiction that governs the entity’s licensed activities.
+              type: string
+              example: US
+            countryOfLicenseSourceLink:
+              description: Provides the URL or link to the source that confirms the country where the entity’s license was issued. This link serves as a reference for verification purposes.
+              type: string
+              example: https://source-link.com
+              
+    DON:
+      description: A donation entity in crypto refers to an organization or platform that accepts charitable contributions in the form of cryptocurrencies, leveraging blockchain technology to facilitate transparent and efficient donation processes.
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string
+            isScam:
+              $ref: '#/components/schemas/IsScamEnum'
+            scamSource:
+              description: Identifies the origin or source from which the scam information about the entity was obtained. This could include reports, databases, user submissions, or other investigative sources.
+              type: string
+              example: https://source-link.com              
+              
+              
+    ETF:
+      description: Refers to the various parties or organizations involved in the creation, management, and trading of Exchange-Traded Funds (ETFs). These entities play specific roles in the operation and oversight of ETFs in the financial markets.
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string
+            countryOfIncorporation:
+              description: Specifies the country where the entity is legally registered and incorporated. This information is used to identify the jurisdiction governing the entity’s legal status and operations.
+              type: string
+              example: US
+            countryOfIncorporationSourceLink:
+              description: Provides the URL or link to the source that verifies the country of incorporation for the entity. This link serves as a reference for the information provided.
+              type: string
+              example: https://source-link.com
+    EXTR:
+      description: Extremist and violent groups are organizations or collectives that hold radical ideologies and often engage in or promote violent activities to achieve political, religious, or ideological objectives.
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string
+              
+    EXPL:
+      description: Exploits also referred to as hacks are techniques that take advantage of vulnerabilities in cryptocurrency platforms, software, or protocols to conduct unauthorized actions, such as theft or unauthorized access to funds.
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string
+              
+    FCT:
+      description: A crypto faucet is an app or a website that distributes small amounts of cryptocurrencies as a reward for completing easy tasks. 
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string
+            isScam:
+              $ref: '#/components/schemas/IsScamEnum'
+            scamSource:
+              description: Identifies the origin or source from which the scam information about the entity was obtained. This could include reports, databases, user submissions, or other investigative sources.
+              type: string
+              example: https://source-link.com  
+              
+    MINE:
+      description: A mining entity in crypto refers to an individual or organization that uses computational power to validate and secure transactions on a blockchain network, earning rewards in the form of newly minted cryptocurrencies.
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string
+              
+    OTH:
+      description: The "Others" category encompasses a group of entities for which we have yet to determine a proper classification, as they do not align with our existing category definitions. Additionally, these entities are characterized by a low number of attributed characteristics.  
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            tags:
+              description: Classifies the type or category of content associated with an entity.
+              type: array
+              items:
+                type: string
+                oneOf:
+                - title: Adult
+                  description: This tag identifies entities or services that primarily provide content, products, or services intended for adult audiences, typically restricted by age.
+                  
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string
+              
+    MLWR:
+      description: Malwares are malicious software designed to steal, manipulate, or disrupt cryptocurrency assets and transactions. They exploit vulnerabilities to access private keys, wallet information, or to illicitly mine cryptocurrencies.  
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string
+              
+    FORU:
+      description: Forums are clearnet and dark web platforms where discussions are being held and may occasionally involve the exchange of information related to illicit activities including crypto transactions.
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            screenshotFrontPage:
+              description: Captures a visual snapshot of the entity’s front or main webpage at a specific point in time. This image is used for reference or documentation purposes.
+              type: string
+              example: https://screenshots.com/binance-frontpage.com
+            topics:
+              description: This metadata field identifies the specific name discussion existing on the forum.
+              type: array
+              items:
+                type: string
+                enum:
+                  - Drugs
+                  - Security And Hosting
+                  - Weapons & Fireams
+                  - Digital Products
+                  - CSAM
+                  - Terrorist Activities/Services
+                  - Electronics
+                  - Services
+            tags:
+              description: Classifies the type or category of content associated with an entity.
+              type: array
+              items:
+                type: string
+                oneOf:
+                - title: Clearnet
+                  description: Refers to websites or platforms accessible on the standard internet (Clearnet) 
+                  
+                - title: Darkweb
+                  description: Refers to hidden websites and platforms on the dark web. These sites are typically accessed via anonymity networks like Tor, and operate beyond standard internet oversight, making them more difficult to detect and shut down.
+            isScam:
+              $ref: '#/components/schemas/IsScamEnum'
+            scamSource:
+              description: Identifies the origin or source from which the scam information about the entity was obtained. This could include reports, databases, user submissions, or other investigative sources.
+              type: string
+              example: https://source-link.com     
+              
+    SHOP:
+      description: A platform, whether an online website or a physical store, that offers a variety of products or services, such as clothes, jewelry, cars, or other merchandise, available for purchase using cryptocurrency.
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            screenshotFrontPage:
+              description: Captures a visual snapshot of the entity’s front or main webpage at a specific point in time. This image is used for reference or documentation purposes.
+              type: string
+              example: https://screenshots.com/binance-frontpage.com
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string
+            isScam:
+              $ref: '#/components/schemas/IsScamEnum'
+            scamSource:
+              description: Identifies the origin or source from which the scam information about the entity was obtained. This could include reports, databases, user submissions, or other investigative sources.
+              type: string
+              example: https://source-link.com    
+              
+    TF:
+      description: TF refers to organizations or entities that receive money or financial support from individuals or companies to back terrorist actions tied to specific ideology.
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            screenshotFrontPage:
+              description: Captures a visual snapshot of the entity’s front or main webpage at a specific point in time. This image is used for reference or documentation purposes.
+              type: string
+              example: https://screenshots.com/binance-frontpage.com
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string    
+              
+    SCAM:
+      description: Scams are deceptive schemes designed to defraud individuals or groups by exploiting their interest in cryptocurrencies.
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string 
+            tags:
+              description: Classifies the type or category of content associated with an entity.
+              type: array
+              items:
+                type: string
+                oneOf:
+                - title: Exit Scam
+                  description: Exit Scam refers to a situation where the operators of a cryptocurrency project or platform abruptly terminate operations and abscond with the investors' funds, leaving participants with substantial losses.
+                  
+                - title: Rug Pull
+                  description: RugPull refers to a fraudulent scheme in which the developers of a cryptocurrency project suddenly withdraw all their liquidity or assets from the project, causing the value of the project's token to plummet and leaving investors with worthless assets.
+                  
+                - title: ICO Scam
+                  description: ICO Scam refers to a fraudulent Initial Coin Offering where organizers collect funds from investors under false pretenses and then fail to execute the promised project
+                  
+                - title: Fraudulent Trading Platforms
+                  description: Fraudulent Trading Platforms refers to deceptive online services that claim to offer legitimate trading but manipulate outcomes or steal users' investments.
+                  
+                - title: Investment Scams
+                  description: Investment scams refers to a scheme that deceives individuals into investing under false promises of high returns, only to misappropriate the funds.
+                  
+                - title: Ponzi Scheme
+                  description: Ponzi scheme refers to a fraudulent investing scam promising high returns with little risk by paying earlier investors with the new investors' money.
+                  
+                - title: Fake Job Listings
+                  description: Fake job listing refers to a fraudulent advertisement for a non-existent job, designed to collect personal information or money from unsuspecting applicants.
+                  
+                - title: Blackmail Scams
+                  description: Blackmail scams refers to a scheme where scammers threaten to reveal sensitive information about an individual unless they receive payment or other demands.
+                  
+                - title: Airdrop Scam
+                  description: Airdrop scam refers to phishing attacks using fake websites, emails, and social media accounts to trick users into claiming a fake airdrop. This usually entails convincing users into connecting their wallets to malicious smart contracts or sharing their private keys in order to claim the 'airdrop', after which the wallet is drained of all its holdings.  
+                  
+                - title: Cloud Mining
+                  description: Cloud mining refers to a scheme where fraudulent services offer non-existent or unprofitable cryptocurrency mining contracts, deceiving investors out of their funds without delivering promised returns.  
+                  
+                - title: Giveaway Scams
+                  description: Giveaway scams refers to a fraudulent scheme where perpetrators promise free rewards or money in return for a small payment or personal information, but fail to deliver the promised giveaways.   
+                  
+                - title: Impersonation Scam
+                  description: Impersonation scam refers to a deceptive tactic where fraudsters pretend to be someone else, often a trusted individual or entity, to trick victims into sending money or revealing personal information.
+                  
+                - title: Deceptive Smart Contracts Or Wallet Drainer
+                  description: Deceptive Smart Contracts / Wallet Drainer refers to a scheme where fraudulent contracts or applications are designed to illicitly transfer or drain assets from a user's cryptocurrency wallet without their consent.
+                  
+                - title: Business Email Compromise
+                  description: Business Email Compromise refers to a sophisticated fraud where attackers impersonate company executives or vendors via email to deceive employees into transferring funds or revealing sensitive information.
+                  
+                - title: Market Manipulation
+                  description: Market Manipulation refers to deliberate actions taken to artificially influence the price or volume of cryptocurrency assets to mislead investors and profit from the manipulated market conditions.
+
+                - title: Advance Fee Scam
+                  description: Advance Fee Scam refers to a scheme where fraudsters solicit payments or fees from victims promising significant returns or services, only to abscond with the fees without delivering the promised outcomes.
+
+                - title: Affinity Scam
+                  description: Affinity Scam refers to a fraudulent scheme where perpetrators exploit the trust and relationships within a group, such as a community or organization, to deceive members into participating in scams or investments.
+
+                - title: Asset Recovery Scam
+                  description: Asset Recovery Scam refers to a deceptive practice where fraudsters claim they can recover lost or stolen assets for a fee, only to take the payment without providing any recovery services.
+
+                - title: Bait And Switch Scam
+                  description: Bait and Switch Scam refers to a deceptive tactic where an appealing offer is advertised to lure customers, only to have them redirected to a less favorable or more expensive product or service.   
+
+                - title: High Yield Investment Program
+                  description: High Yield Investment Program refers to a Ponzi scheme that promises unsustainably high returns on investments, typically paying earlier investors with the capital from new investors, until it inevitably collapses.
+
+                - title: Liquidity Mining Scam
+                  description: Liquidity Mining Scam refers to a fraudulent scheme where participants are enticed to deposit cryptocurrencies into a pool with the promise of high returns, only for the organizers to drain the pool and disappear with the assets.
+
+                - title: Livestream Scams
+                  description: Livestream Scams refers to a fraudulent scheme where perpetrators broadcast fake live events or endorsements to trick viewers into sending cryptocurrency with the promise of receiving more in return, which never materializes.
+                  
+                - title: Tech Support Scam
+                  description: Tech Support Scam refers to a fraudulent practice where scammers pose as tech support agents to deceive individuals into believing their computer is compromised and extort money for unnecessary repair services.
+                  
+                - title: Romance Or Pig Butchering
+                  description: Romance / Pig Butchering refers to a deceptive scheme where fraudsters build romantic relationships online to manipulate victims into sending money or investing in fraudulent ventures.             
+                  
+                  
+    PSP:
+      description: PSPs (Payment Service Providers) refer to companies that facilitate businesses in accepting cryptocurrencies as payment, offering solutions for processing transactions, converting digital currencies to fiat, and ensuring secure transfers.
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            countryOfIncorporation:
+              description: Specifies the country where the entity is legally registered and incorporated. This information is used to identify the jurisdiction governing the entity’s legal status and operations.
+              type: string
+              example: US
+            countryOfIncorporationSourceLink:
+              description: Provides the URL or link to the source that verifies the country of incorporation for the entity. This link serves as a reference for the information provided.
+              type: string
+              example: https://source-link.com
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string
+            isLicensed:
+              $ref: '#/components/schemas/IsLicensedEnum'
+            countryOfLicense:
+              description: Specifies the country in which the entity has obtained its operating license. This identifies the jurisdiction that governs the entity’s licensed activities.
+              type: string
+              example: US
+            countryOfLicenseSourceLink:
+              description: Provides the URL or link to the source that confirms the country where the entity’s license was issued. This link serves as a reference for verification purposes.
+              type: string
+              example: https://source-link.com
+              
+    PPE:
+      description: Entities that have publicly acknowledged their involvement with cryptocurrency, such as owning wallets or accepting payments, or those identified through sanctions or public regulatory frameworks.
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            tags:
+              description: Classifies the type or category of content associated with an entity.
+              type: array
+              items:
+                type: string
+                oneOf:
+                - title: Individuals
+                  description: A well-known individual who has publicly acknowledged ownership of a specific cryptocurrency wallet, or an individual identified by virtue of being sanctioned by a regime, with cryptocurrency addresses attributed to them, regardless of public acknowledgment.
+                  
+                - title: Company
+                  description: Companies that integrate cryptocurrency as a payment option for certain products, or companies identified by virtue of being sanctioned by a regime, with cryptocurrency addresses attributed to them.
+                  
+                - title: Government
+                  description: This includes government agencies that hold cryptocurrency for various purposes with identified cryptocurrency addresses
+                  
+            countryOfOperationAndOrigin:
+              description: This metadata field identifies the specific country of operation or origin of the entity.
+              type: string
+              example: US
+            incorporationDate:
+              description: This metadata field identifies the date the entity was incorporated.
+              format: date-time
+              type: string
+              example: 2017-07-21T17:32:28Z            
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string
+              
+    MIXR:
+      description: A cryptocurrency mixing service is a service offered to mix potentially identifiable or 'tainted' cryptocurrency funds and pool them with others, so as to obscure the trail back to the fund's original source.
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            tags:
+              description: Classifies the type or category of content associated with an entity.
+              type: array
+              items:
+                type: string
+                oneOf:
+                - title: Centralized
+                  description: Centralized mixer refers to mixing services controlled or managed by a single entity or organization, which controls the mixing process and holds users' funds temporarily during the operation.
+                  
+                - title: Decentralized
+                  description: Decentralized mixer refers to automated mixing services that operate independently through the use of smart contracts.
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string
+            isScam:
+              $ref: '#/components/schemas/IsScamEnum'
+            scamSource:
+              description: Identifies the origin or source from which the scam information about the entity was obtained. This could include reports, databases, user submissions, or other investigative sources.
+              type: string
+              example: https://source-link.com            
+              
+    GM:
+      description: Gambling entities refer to online platforms or services that offer gambling games or betting opportunities where transactions and wagers are made using cryptocurrencies.
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            tags:
+              description: Classifies the type or category of content associated with an entity.
+              type: array
+              items:
+                type: string
+                oneOf:
+                - title: Centralized
+                  description: Centralized gambling refers to online betting or gambling platforms managed by a single company or entity that controls the games, odds, and user accounts.
+                  
+                - title: Decentralized
+                  description: Decentralized gambling refers to online platforms that facilitate betting and gambling activities without a central authority overseeing the operations. These services run on blockchain technology, utilizing smart contracts to execute bets and distribute winnings automatically and transparently.
+            countryOfIncorporation:
+              description: Specifies the country where the entity is legally registered and incorporated. This information is used to identify the jurisdiction governing the entity’s legal status and operations.
+              type: string
+              example: US
+            countryOfIncorporationSourceLink:
+              description: Provides the URL or link to the source that verifies the country of incorporation for the entity. This link serves as a reference for the information provided.
+              type: string
+              example: https://source-link.com
+            kycNotes:
+              description: Additional information or observations related to the Know Your Customer (KYC) verification process for the entity. This may include specific details about the verification, exceptions, or any issues encountered.
+              type: string
+              example: note
+            kycVerification:
+              $ref: '#/components/schemas/KycVerification'
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string
+            screenshotFrontPage:
+              description: Captures a visual snapshot of the entity’s front or main webpage at a specific point in time. This image is used for reference or documentation purposes.
+              type: string
+              example: https://screenshots.com/binance-frontpage.com
+            isLicensed:
+              $ref: '#/components/schemas/IsLicensedEnum'
+            countryOfLicense:
+              description: Specifies the country in which the entity has obtained its operating license. This identifies the jurisdiction that governs the entity’s licensed activities.
+              type: string
+              example: US
+            countryOfLicenseSourceLink:
+              description: Provides the URL or link to the source that confirms the country where the entity’s license was issued. This link serves as a reference for verification purposes.
+              type: string
+              example: https://source-link.com
+            isScam:
+              $ref: '#/components/schemas/IsScamEnum'
+            scamSource:
+              description: Identifies the origin or source from which the scam information about the entity was obtained. This could include reports, databases, user submissions, or other investigative sources.
+              type: string
+              example: https://source-link.com
+              
+    INFT:
+      description: NFTs associated with illicit activities such as scams, exploits, or used in propagating hate speech, among other unlawful endeavors like CSAM and TF.
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            tags:
+              description: Classifies the type or category of content associated with an entity.
+              type: array
+              items:
+                type: string
+                oneOf:
+                - title: Scam
+                  description: Illicit NFTs (scams) refers to NFTs that were created as a scam to defraud investors. 
+                  
+                - title: CSAM
+                  description: Illicit NFTs (CSAM) refers to NFTs that are associated with, or used to distribute, Child Sexual Abuse Material.
+                  
+                - title: TF
+                  description: Illicit NFTs (TF) refers to NFTs that are potentially used as a means to finance terrorist activities.
+                  
+                - title: Propaganda
+                  description: Illicit NFTs (Propaganda) refers to NFTs created or used to spread political messages, ideologies, or influence public opinion.
+                  
+                - title: Exploited
+                  description: Illicit NFTs (exploited) refers to NFTs that were compromised or subjected to smart contract vulnerabilities, leading to a significant loss in their market value.
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string
+            isScam:
+              $ref: '#/components/schemas/IsScamEnum'
+            scamSource:
+              description: Identifies the origin or source from which the scam information about the entity was obtained. This could include reports, databases, user submissions, or other investigative sources.
+              type: string
+              example: https://source-link.com              
+              
+    DNM:
+      description: A Darknet market is a commercial website that operates on the darkweb including telegram. It functions as a black market for illicit goods, such as drugs, weapons, counterfeit currency, stolen credit card information, steroids, forged documents, and more.
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            tags:
+              description: Classifies the type or category of content associated with an entity.
+              type: array
+              items:
+                type: string
+                oneOf:
+                - title: Forum Vendor
+                  description: Darknet market forum vendor refers to DNM vendors identified on forums, regardless of where the transaction was completed. In most cases, forum vendors will continue transaction communication on a privacy enhancing software like Telegram.
+                  
+                - title: Multi Vendor
+                  description: Darknet market multi vendor refers to DNMs where multiple vendors sell goods or services, often illegal, with transactions typically conducted in cryptocurrencies to maintain privacy and security.
+                  
+                - title: Single Vendor
+                  description: Darknet market single vendor refers to DNMs where a single vendor sells goods or services, often illicit. These platforms are operated by one entity or individual, offering a more limited selection but potentially more specialized or trusted offerings.
+                  
+                - title: Telegram
+                  description: Darknet market Telegram vendor refers to marketplaces discovered on telegram or where a vendor identified on a forum decides to conduct transaction off a telegram channel or chat.
+            screenshotFrontPage:
+              description: Captures a visual snapshot of the entity’s front or main webpage at a specific point in time. This image is used for reference or documentation purposes.
+              type: string
+              example: https://screenshots.com/binance-frontpage.com                  
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string
+            isScam:
+              $ref: '#/components/schemas/IsScamEnum'
+            scamSource:
+              description: Identifies the origin or source from which the scam information about the entity was obtained. This could include reports, databases, user submissions, or other investigative sources.
+              type: string
+              example: https://source-link.com   
+            productAndServices:
+              description: Refers to the types of goods and services that are bought and sold on darknet marketplaces (DNMs). These platforms typically facilitate the sale of illegal or restricted items, often using cryptocurrencies to maintain anonymity.
+              type: array
+              items:
+                type: string
+                enum:
+                  - Drugs
+                  - Security And Hosting
+                  - Weapons & Fireams
+                  - Digital Products
+                  - CSAM
+                  - Terrorist Activities/Services
+                  - Electronics
+                  - Services  
+                  - Fraud       
+            marketRules:
+              description: Refers to the set of guidelines and regulations that govern the behavior of vendors and buyers on darknet marketplaces (DNMs). These rules are established to maintain order, resolve disputes, and enforce certain standards within the illegal marketplace.
+              type: string
+                  
+                  
+    VNH:
+      description: A virtual private network (VPN) gives users online privacy and anonymity by creating a private network from a public internet connection. A Hosting is a service that offers hosting services such as Domain hosting, VPS ( virtual machine sold as a service by an Internet hosting), bulletproof hosting (web hosting resilient to cyberattacks). whilst a virtual private network (VPN) gives users online privacy and anonymity by creating a private network from a public internet connection."
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            tags:
+              description: Classifies the type or category of content associated with an entity.
+              type: array
+              items:
+                type: string
+                oneOf:
+                - title: Clearnet
+                  description: Clearnet VPN and Hosting refers to hosting and VPN services found on the web without the use of specialized tools like TOR browsers 
+                  
+                - title: Darkweb
+                  description: Darkweb VPN and Hosting refers to hosting and VPN services found on the web with the aid of specialized tools like TOR browsers
+                  
+                - title: VPN
+                  description: The VPN tag is used to specify if entity  and address (on clearnet or darkweb) belongs to VPN
+                  
+                - title: Hosting
+                  description: The hosting tag is used to specify if entity  and address (on clearnet or darkweb) belongs to hosting
+                  
+                - title: Forum Vendor
+                  description: Forum vendors refers to VPN and Hosting vendors identified on forums, regardless of where the transaction was completed. In most cases, forum vendors will continue transaction communication on a privacy enhancing software like Telegram.
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string
+            isScam:
+              $ref: '#/components/schemas/IsScamEnum'
+            scamSource:
+              description: Identifies the origin or source from which the scam information about the entity was obtained. This could include reports, databases, user submissions, or other investigative sources.
+              type: string
+              example: https://source-link.com 
+            countryOfIncorporation:
+              description: Specifies the country where the entity is legally registered and incorporated. This information is used to identify the jurisdiction governing the entity’s legal status and operations.
+              type: string
+              example: US
+            countryOfIncorporationSourceLink:
+              description: Provides the URL or link to the source that verifies the country of incorporation for the entity. This link serves as a reference for the information provided.
+              type: string
+              example: https://source-link.com
+
+
+    DEFI:
+      description: A financial ecosystem built on blockchain technology that operates without intermediaries, allowing users to access services like lending, borrowing, trading, and investing directly through smart contracts. In DeFi, control and ownership of assets remain with the user, and transactions are facilitated by decentralized protocols rather than centralized institutions.
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            tags:
+              description: Classifies the type or category of content associated with an entity.
+              type: array
+              items:
+                type: string
+                oneOf:
+                - title: DEX/Swap Services
+                  description: A Decentralized exchange (DEX) is an exchange that operates on a non-custodial basis, allowing users to retain control of their private keys during transactions, which are typically facilitated through smart contracts on the DEX platform.
+                  
+                - title: Decentralized Bridge
+                  description: A decentralized bridge is a service that enables the trustless and secure transfer of assets between different blockchain networks, leveraging smart contracts and decentralized validators to ensure seamless interoperability and enhanced security.
+                  
+                - title: P2P Exchange
+                  description: Decentralized P2P services are platforms that enable direct cryptocurrency transactions between users without the need for a central authority. These platforms rely on blockchain technology and smart contracts to facilitate and secure trades.
+                  
+                - title: Derivative And Synthetic Assets
+                  description: Derivative and Synthetic Assets entities leverage smart contracts, oracles, and collateralization mechanisms, they provide users with advanced tools for hedging, speculation, and accessing a diverse array of assets.
+                  
+                - title: DAO
+                  description: DAO entities, or Decentralized Autonomous Organizations, are entities in the decentralized finance (DeFi) ecosystem that operate based on rules encoded in smart contracts. These rules govern the organization’s operations, decision-making processes, and governance structures, enabling them to function without centralized control.
+                  
+                - title: Yield Farming and Liquidity Mining
+                  description: This represents a new category of financial instrument other than exchanges that comprises of yields, loans, insurance and staking platform. Example is Cream finance, Alchemix, Aave etc.
+                  
+                - title: Infrastructure
+                  description: This refers to entities that offers software, hardware, and other essential resources and services to blockchain-based products. This also includes Oracles.
+                 
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string
+            isScam:
+              $ref: '#/components/schemas/IsScamEnum'
+            scamSource:
+              description: Identifies the origin or source from which the scam information about the entity was obtained. This could include reports, databases, user submissions, or other investigative sources.
+              type: string
+              example: https://source-link.com 
+            countryOfIncorporation:
+              description: Specifies the country where the entity is legally registered and incorporated. This information is used to identify the jurisdiction governing the entity’s legal status and operations.
+              type: string
+              example: US
+            countryOfIncorporationSourceLink:
+              description: Provides the URL or link to the source that verifies the country of incorporation for the entity. This link serves as a reference for the information provided.
+              type: string
+              example: https://source-link.com
+
+    CSAM:
+      description: Child Sexual Abuse Material (CSAM) refers not only to platforms but also to any entities involved in displaying and/or selling content that depicts sexually explicit conduct involving minors. This includes images, videos, and other forms of media showcasing such illegal activities.
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            tags:
+              description: Classifies the type or category of content associated with an entity.
+              type: array
+              items:
+                type: string
+                oneOf:
+                - title: Clearnet
+                  description: Refers to websites or platforms accessible on the standard internet (Clearnet) that are involved in the distribution or facilitation of Child Sexual Abuse Material (CSAM).
+                  
+                - title: Darkweb
+                  description: Refers to hidden websites and platforms on the dark web that are involved in the illegal distribution or facilitation of Child Sexual Abuse Material (CSAM). These sites are typically accessed via anonymity networks like Tor, and operate beyond standard internet oversight, making them more difficult to detect and shut down.
+                  
+                - title: Single Vendor
+                  description: Refers to a specific platform, website, or operation run by a single entity or individual dedicated to distributing Child Sexual Abuse Material (CSAM). These operations are typically managed by one vendor or group that controls the content and transactions, often for profit or other illicit purposes.
+                  
+                - title: Multi vendor
+                  description: Refers to platforms or marketplaces where multiple individuals or entities can sell, trade, or distribute Child Sexual Abuse Material (CSAM). These platforms typically function as marketplaces, allowing various vendors to upload and sell illegal content, often using anonymous payment methods like cryptocurrencies.
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string
+            screenshotFrontPage:
+              description: Captures a visual snapshot of the entity’s front or main webpage at a specific point in time. This image is used for reference or documentation purposes.
+              type: string
+              example: https://screenshots.com/binance-frontpage.com
+            isScam:
+              $ref: '#/components/schemas/IsScamEnum'
+            scamSource:
+              description: Identifies the origin or source from which the scam information about the entity was obtained. This could include reports, databases, user submissions, or other investigative sources.
+              type: string
+              example: https://source-link.com
+            mediaType:
+              description: Specifies the format or medium in which Child Sexual Abuse Material (CSAM) is distributed or consumed. These media types can include images, videos, audio recordings, or text-based descriptions, all of which are illegal.
+              type: array
+              items:
+                $ref: '#/components/schemas/MediaType'
+            membershipAccess:
+              description: Describes the various methods by which individuals can gain access to platforms distributing Child Sexual Abuse Material (CSAM). These methods may involve different forms of authentication, payment, or verification.
+              type: string                
+              
     Trace:
       description: The trace object contains all the information about a Chainlabs tracing transaction, including the seed address and entity label
       type: object
@@ -480,8 +1260,34 @@ components:
           type: array
           items:
             anyOf:
-              - $ref: '#/components/schemas/Atm'
-              - $ref: '#/components/schemas/Crim'
+              - $ref: '#/components/schemas/ATM'
+              - $ref: '#/components/schemas/CRIM'
+              - $ref: '#/components/schemas/CEFI'
+              - $ref: '#/components/schemas/CUST'
+              - $ref: '#/components/schemas/DON'
+              - $ref: '#/components/schemas/ETF'
+              - $ref: '#/components/schemas/EXTR'
+              - $ref: '#/components/schemas/EXPL'
+              - $ref: '#/components/schemas/FCT'
+              - $ref: '#/components/schemas/MINE'
+              - $ref: '#/components/schemas/OTH'
+              - $ref: '#/components/schemas/MLWR'
+              - $ref: '#/components/schemas/FORU'
+              - $ref: '#/components/schemas/SHOP'
+              - $ref: '#/components/schemas/TF'
+              - $ref: '#/components/schemas/SCAM'
+              - $ref: '#/components/schemas/PSP'
+              - $ref: '#/components/schemas/PPE'
+              - $ref: '#/components/schemas/MIXR'
+              - $ref: '#/components/schemas/GM'
+              - $ref: '#/components/schemas/INFT'
+              - $ref: '#/components/schemas/DNM'
+              - $ref: '#/components/schemas/VNH'
+              - $ref: '#/components/schemas/DEFI'
+              - $ref: '#/components/schemas/CSAM'
+              
+              
+              
         nextPageToken:
           description: To get the next page of entities, set pageToken value to the nextPageToken returned in the response.
           type: integer
@@ -533,6 +1339,10 @@ components:
         description: Data was collected or observed from external sources without direct interaction with the wallet. This typically refers to information gathered from scrapped data (screenshot proof unavailable).
       - title: Private
         description: The is used to represent private enhancing tokens like Monero (screenshot proof available).
+      - title: Verified OSINT
+        description: Data was collected or observed from a vetted source, usually an organization that verifies the tags (such as OFAC) (screenshot proof unavailable).
+      - title: Community OSINT
+        description: Data gathered from open-source platforms where contributions come from a wide range of users, often resulting in lower confidence due to the unverified nature of the information. Examples include platforms like Labelcloud and Arkham, or individuals posting on Twitter claiming discoveries such as identifying Tesla’s wallet or reporting through sites like Bitcoinabuse.       
     CategoryIdEnum:
       type: string
       oneOf:
@@ -540,6 +1350,53 @@ components:
         description: Criminal Enterprises category encompasses a broad spectrum of illicit activities conducted with the intention to gain profit or achieve some unlawful objectives. They are often organized and executed within the framework of larger criminal operations or networks.
       - title: ATM
         description: Cryptoasset ATMs also known as Automated Teller Machines, are self-service kiosks enabling individuals to buy or sell Bitcoin and other cryptocurrencies using cash or debit cards
+      - title: CEFI
+        description: A financial system where traditional financial services (such as trading, lending, and borrowing) are managed by centralized entities or institutions. In CeFi, a trusted intermediary holds and controls the users’ funds and data, often requiring compliance with regulations like KYC and AML (Anti-Money Laundering).
+      - title: CUST
+        description: Custodial Services refer to third-party providers that manage and safeguard cryptocurrency assets on behalf of their clients, holding the private keys and offering security and ease of access to the funds. 
+      - title: DON
+        description: A donation entity in crypto refers to an organization or platform that accepts charitable contributions in the form of cryptocurrencies, leveraging blockchain technology to facilitate transparent and efficient donation processes.       
+      - title: ETF
+        description: CRefers to the various parties or organizations involved in the creation, management, and trading of Exchange-Traded Funds (ETFs). These entities play specific roles in the operation and oversight of ETFs in the financial markets.      
+      - title: EXTR
+        description: Extremist and violent groups are organizations or collectives that hold radical ideologies and often engage in or promote violent activities to achieve political, religious, or ideological objectives.
+      - title: EXPL
+        description: Exploits also referred to as hacks are techniques that take advantage of vulnerabilities in cryptocurrency platforms, software, or protocols to conduct unauthorized actions, such as theft or unauthorized access to funds.        
+      - title: FCT
+        description: A crypto faucet is an app or a website that distributes small amounts of cryptocurrencies as a reward for completing easy tasks.         
+      - title: MINE
+        description: A mining entity in crypto refers to an individual or organization that uses computational power to validate and secure transactions on a blockchain network, earning rewards in the form of newly minted cryptocurrencies.          
+      - title: OTH
+        description: The "Others" category encompasses a group of entities for which we have yet to determine a proper classification, as they do not align with our existing category definitions. Additionally, these entities are characterized by a low number of attributed characteristics.        
+      - title: MLWR
+        description: Malwares are malicious software designed to steal, manipulate, or disrupt cryptocurrency assets and transactions. They exploit vulnerabilities to access private keys, wallet information, or to illicitly mine cryptocurrencies.         
+      - title: FORU
+        description: Forums are clearnet and dark web platforms where discussions are being held and may occasionally involve the exchange of information related to illicit activities including crypto transactions.        
+      - title: SHOP
+        description: A platform, whether an online website or a physical store, that offers a variety of products or services, such as clothes, jewelry, cars, or other merchandise, available for purchase using cryptocurrency.        
+      - title: TF
+        description: TF refers to organizations or entities that receive money or financial support from individuals or companies to back terrorist actions tied to specific ideology.        
+      - title: SCAM
+        description: Scams are deceptive schemes designed to defraud individuals or groups by exploiting their interest in cryptocurrencies.
+      - title: PSP
+        description: PSPs (Payment Service Providers) refer to companies that facilitate businesses in accepting cryptocurrencies as payment, offering solutions for processing transactions, converting digital currencies to fiat, and ensuring secure transfers.        
+      - title: PPE
+        description: Entities that have publicly acknowledged their involvement with cryptocurrency, such as owning wallets or accepting payments, or those identified through sanctions or public regulatory frameworks.        
+      - title: MIXR
+        description:  A cryptocurrency mixing service is a service offered to mix potentially identifiable or 'tainted' cryptocurrency funds and pool them with others, so as to obscure the trail back to the fund's original source.        
+      - title: GM
+        description: Gambling entities refer to online platforms or services that offer gambling games or betting opportunities where transactions and wagers are made using cryptocurrencies.        
+      - title: INFT
+        description: NFTs associated with illicit activities such as scams, exploits, or used in propagating hate speech, among other unlawful endeavors like CSAM and TF.        
+      - title: DNM
+        description: A Darknet market is a commercial website that operates on the darkweb including telegram. It functions as a black market for illicit goods, such as drugs, weapons, counterfeit currency, stolen credit card information, steroids, forged documents, and more.        
+      - title: VNH
+        description: A virtual private network (VPN) gives users online privacy and anonymity by creating a private network from a public internet connection. A Hosting is a service that offers hosting services such as Domain hosting, VPS ( virtual machine sold as a service by an Internet hosting), bulletproof hosting (web hosting resilient to cyberattacks). whilst a virtual private network (VPN) gives users online privacy and anonymity by creating a private network from a public internet connection.        
+      - title: DEFI
+        description: A financial ecosystem built on blockchain technology that operates without intermediaries, allowing users to access services like lending, borrowing, trading, and investing directly through smart contracts. In DeFi, control and ownership of assets remain with the user, and transactions are facilitated by decentralized protocols rather than centralized institutions.    
+      - title: CSAM
+        description: Child Sexual Abuse Material (CSAM) refers not only to platforms but also to any entities involved in displaying and/or selling content that depicts sexually explicit conduct involving minors. This includes images, videos, and other forms of media showcasing such illegal activities.
+        
     KycVerification:
       type: array
       description: Lists the types of documents or information that have been used to verify the identity of the entity or individual as part of the Know Your Customer (KYC) process.
@@ -552,6 +1409,17 @@ components:
           - Driving License
           - Selfie
           - Phone Number
+    MediaType:
+      type: array
+      description: Specifies the format or medium in which Child Sexual Abuse Material (CSAM) is distributed or consumed. These media types can include images, videos, audio recordings, or text-based descriptions, all of which are illegal.
+      items:
+        type: string
+        enum:
+          - Images
+          - Videos
+          - Audio
+          - Text
+          - Live Streams
     OperationalStatusEnum:
       type: string
       description: Indicates the current availability and functionality of a website. This status reflects whether the website is accessible to users, temporarily unavailable, or undergoing updates.
