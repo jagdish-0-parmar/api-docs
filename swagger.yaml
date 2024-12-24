@@ -1494,6 +1494,7 @@ components:
         - title: AED
         - title: KRW
         - title: AUD
+        - title: None
     EventTypeEnum:
       type: string
       oneOf:
