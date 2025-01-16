@@ -1433,10 +1433,11 @@ components:
     IsLicensedEnum:
       type: string
       description: Indicates whether the entity holds a valid license to operate within its respective jurisdiction. This status helps determine the entity’s regulatory compliance.
-      oneOf:
-      - title: Yes
-      - title: No
-      - title: Unknown
+      enum:
+        - Yes
+        - No
+        - Unknown
+
     IsScamEnum:
       type: array
       description: Indicates whether the entity is identified or suspected as a scam. This status helps classify the entity based on its legitimacy.
