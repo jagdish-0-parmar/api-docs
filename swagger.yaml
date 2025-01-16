@@ -6,7 +6,7 @@ info:
     
     The Chainlabs API provides an automated way of retrieving traced seed addresses, corresponding metadata, and screenshot proofs to replace the monthly manual CSV deliveries.
     
-    To obtain all the historical as well as newly added entities, traces, and screenshots, use the */entities* and */traces* endpoints. To get modification/deletion events that have taken place on existing data, use the */sync_entities* and */sync_traces* endpoints and modify/delete entities or traces on your local data based on them. 
+    To retrieve all historical and newly added entities, traces, and screenshots, use the */entities* and */traces* endpoints. To receive updates on modifications or deletions of existing data, use the */sync_entities* and */sync_traces* endpoints. 
   version: 0.1.0
 paths:
   /entities:
