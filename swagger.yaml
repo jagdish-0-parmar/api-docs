@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Chainlabs API
   description: |-
-    ### *The API is still in the design stage and things are subject to change. In fact, your input will be appreciated. Many more categories are yet to be added to the schema, for example, Centralized exchanges, DeFi, etc.* 
+    ### 
     
     The Chainlabs API provides an automated way of retrieving traced seed addresses, corresponding metadata, and screenshot proofs to replace the monthly manual CSV deliveries.
     
