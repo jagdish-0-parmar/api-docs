@@ -1,4 +1,3 @@
-<!-- HTML for static distribution bundle build -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,8 +11,21 @@
 
   <body>
     <div id="swagger-ui"></div>
-    <script src="dist/swagger-ui-bundle.js" charset="UTF-8"> </script>
-    <script src="dist/swagger-ui-standalone-preset.js" charset="UTF-8"> </script>
-    <script src="dist/swagger-initializer.js" charset="UTF-8"> </script>
+    <script src="dist/swagger-ui-bundle.js" charset="UTF-8"></script>
+    <script src="dist/swagger-ui-standalone-preset.js" charset="UTF-8"></script>
+    <script>
+      window.onload = () => {
+        window.ui = SwaggerUIBundle({
+          url: "openapi.yaml",  // 👈 your 3.1.0 spec
+          dom_id: '#swagger-ui',
+          deepLinking: true,
+          presets: [
+            SwaggerUIBundle.presets.apis,
+            SwaggerUIStandalonePreset
+          ],
+          layout: "StandaloneLayout"
+        });
+      };
+    </script>
   </body>
 </html>
