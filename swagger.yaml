@@ -1286,9 +1286,6 @@ components:
               - $ref: '#/components/schemas/VNH'
               - $ref: '#/components/schemas/DEFI'
               - $ref: '#/components/schemas/CSAM'
-              
-              
-              
         nextPageToken:
           description: To get the next page of entities, set pageToken value to the nextPageToken returned in the response.
           type: integer
@@ -1410,6 +1407,7 @@ components:
           - Driving License
           - Selfie
           - Phone Number
+          - None
     MediaType:
       type: array
       description: Specifies the format or medium in which Child Sexual Abuse Material (CSAM) is distributed or consumed. These media types can include images, videos, audio recordings, or text-based descriptions, all of which are illegal.
@@ -1447,58 +1445,202 @@ components:
         enum:
           - Yes
           - No
+          - Unknown
     TokenEnum:
       type: string
       description: A specific cryptocurrency or token that has been tracked through a blockchain tracing process, linked to the entity’s activities.
       oneOf:
-      - title: BTC
-      - title: BCH
-      - title: LTC
-      - title: ETH
-      - title: DASH
-      - title: TRX
-      - title: ZEC
-      - title: DOGE
-      - title: XRP
-      - title: SOL
-      - title: EOS
       - title: ADA
       - title: ALGO
-      - title: MATIC
-      - title: BNB
-      - title: XMR
-      - title: DOT
-      - title: FTM
-      - title: XLM
+      - title: ARB
       - title: ATOM
+      - title: AVAX
+      - title: BASE
+      - title: BCH
+      - title: BNB
+      - title: BTC
+      - title: DASH
+      - title: DOGE
+      - title: DOT
+      - title: EOS
+      - title: ETH
+      - title: FTM
+      - title: LTC
+      - title: MATIC
+      - title: OP
+      - title: SOL
+      - title: TON
+      - title: TRX
+      - title: USDT-BEP20
+      - title: USDT-ERC20
+      - title: USDT-TRC20
+      - title: XLM
+      - title: XMR
+      - title: XRP
+      - title: ZEC
     SupportedFiatEnum:
       description: Fiat currencies that are supported or accepted by the entity.
       type: string
       oneOf:
-        - title: CHF
-        - title: TWD
-        - title: ZAR
-        - title: GBP
-        - title: USD
-        - title: RUB
-        - title: HKD
-        - title: CNY
-        - title: INR
-        - title: SGD
-        - title: EUR
-        - title: BRL
-        - title: NZD
-        - title: MXN
-        - title: TRY
-        - title: SEK
-        - title: CAD
-        - title: JPY
         - title: AED
-        - title: KRW
+        - title: AFN
+        - title: ALL
+        - title: AMD
+        - title: ANG
+        - title: AOA
+        - title: ARS
         - title: AUD
+        - title: AWG
+        - title: AZN
+        - title: BAM
+        - title: BBD
+        - title: BDT
+        - title: BGN
+        - title: BHD
+        - title: BIF
+        - title: BMD
+        - title: BND
+        - title: BOB
+        - title: BRL
+        - title: BSD
+        - title: BTN
+        - title: BWP
+        - title: BYN
+        - title: BZD
+        - title: CAD
+        - title: CDF
+        - title: CHF
+        - title: CLP
+        - title: CNY
+        - title: COP
+        - title: CRC
+        - title: CUP
+        - title: CVE
+        - title: CZK
+        - title: DJF
+        - title: DKK
+        - title: DOP
+        - title: DZD
+        - title: EGP
+        - title: ERN
+        - title: ETB
+        - title: EUR
+        - title: FJD
+        - title: FKP
+        - title: GBP
+        - title: GEL
+        - title: GHS
+        - title: GIP
+        - title: GMD
+        - title: GNF
+        - title: GTQ
+        - title: GYD
+        - title: HKD
+        - title: HNL
+        - title: HTG
+        - title: HUF
+        - title: IDR
+        - title: ILS
+        - title: INR
+        - title: IQD
+        - title: IRR
+        - title: ISK
+        - title: JMD
+        - title: JOD
+        - title: JPY
+        - title: KES
+        - title: KGS
+        - title: KHR
+        - title: KMF
+        - title: KPW
+        - title: KRW
+        - title: KWD
+        - title: KYD
+        - title: KZT
+        - title: LAK
+        - title: LBP
+        - title: LKR
+        - title: LRD
+        - title: LSL
+        - title: LYD
+        - title: MAD
+        - title: MDL
+        - title: MGA
+        - title: MKD
+        - title: MMK
+        - title: MNT
+        - title: MOP
+        - title: MRU
+        - title: MUR
+        - title: MVR
+        - title: MWK
+        - title: MXN
+        - title: MYR
+        - title: MZN
+        - title: NAD
+        - title: NGN
+        - title: NIO
+        - title: NOK
         - title: None
+        - title: NPR
+        - title: NZD
+        - title: OMR
+        - title: PAB
+        - title: PEN
+        - title: PGK
+        - title: PHP
+        - title: PKR
+        - title: PLN
+        - title: PYG
+        - title: QAR
+        - title: RON
+        - title: RSD
+        - title: RUB
+        - title: RWF
+        - title: SAR
+        - title: SBD
+        - title: SCR
+        - title: SDG
+        - title: SEK
+        - title: SGD
+        - title: SHP
+        - title: SLL
+        - title: SOS
+        - title: SRD
+        - title: SSP
+        - title: STN
+        - title: SYP
+        - title: SZL
+        - title: THB
+        - title: TJS
+        - title: TMT
+        - title: TND
+        - title: TOP
+        - title: TRY
+        - title: TTD
+        - title: TVD
+        - title: TWD
+        - title: TZS
+        - title: UAH
+        - title: UGX
+        - title: USD
+        - title: UYU
+        - title: UZS
+        - title: VES
+        - title: VND
+        - title: VUV
+        - title: WST
+        - title: XAF
+        - title: XCD
+        - title: XOF
+        - title: XPF
+        - title: YER
+        - title: ZAR
+        - title: ZMW
+        - title: ZWL
     EventTypeEnum:
       type: string
       oneOf:
       - title: MODIFY
       - title: DELETE
+      - title: ADD
