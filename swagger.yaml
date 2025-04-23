@@ -1643,4 +1643,3 @@ components:
       oneOf:
       - title: MODIFY
       - title: DELETE
-      - title: ADD
