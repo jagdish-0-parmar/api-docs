@@ -453,6 +453,58 @@ components:
               description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
               type: string
               
+    OTC:
+      description: Over-the-counter entities involved in fiat-to-crypto or crypto-to-fiat exchange activity, tracked with trace evidence, wallet data, and QC outcomes.
+      allOf:
+        - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            entityType:
+              description: Classification of the OTC entity.
+              type: string
+              enum:
+                - Individual
+                - Company
+                - Organization
+            contactType:
+              description: The contact channel used by the entity.
+              type: string
+              enum:
+                - Telegram
+                - WhatsApp
+                - Website
+                - Email
+                - Instagram
+                - Facebook
+                - Viber
+                - Wechat
+                - Other
+                - In Person
+                - Phone
+                - Platform Chat
+                - XHS
+                - YouTube
+            contactInfo:
+              description: The entity's contact identifier: a handle, phone number, or URL.
+              type: string
+            supportedFiat:
+              description: Fiat currencies supported by the entity.
+              type: array
+              items:
+                $ref: '#/components/schemas/SupportedFiatEnum'
+            kycVerification:
+              $ref: '#/components/schemas/KycVerification'
+            location:
+              description: A maps link and/or coordinates pointing to the entity's physical location.
+              type: string
+            countryOfOperationAndOrigin:
+              description: ISO-2 country code representing the entity's country.
+              type: string
+              example: US
+            osint:
+              description: Refers to information gathered from publicly available sources, often used for investigative purposes. OSINT data can include anything from social media profiles to publicly accessible databases, websites, news articles, and more.
+              type: string
+              
     MLWR:
       description: Malwares are malicious software designed to steal, manipulate, or disrupt cryptocurrency assets and transactions. They exploit vulnerabilities to access private keys, wallet information, or to illicitly mine cryptocurrencies.  
       allOf:
@@ -1366,6 +1418,8 @@ components:
         description: A mining entity in crypto refers to an individual or organization that uses computational power to validate and secure transactions on a blockchain network, earning rewards in the form of newly minted cryptocurrencies.          
       - title: OTH
         description: The "Others" category encompasses a group of entities for which we have yet to determine a proper classification, as they do not align with our existing category definitions. Additionally, these entities are characterized by a low number of attributed characteristics.        
+      - title: OTC
+        description: Over-the-counter entities involved in fiat-to-crypto or crypto-to-fiat exchange activity, tracked with trace evidence, wallet data, and QC outcomes.
       - title: MLWR
         description: Malwares are malicious software designed to steal, manipulate, or disrupt cryptocurrency assets and transactions. They exploit vulnerabilities to access private keys, wallet information, or to illicitly mine cryptocurrencies.         
       - title: FORU
@@ -1466,7 +1520,7 @@ components:
       - title: ETH
       - title: FTM
       - title: LTC
-      - title: MATIC
+      - title: POL
       - title: OP
       - title: SOL
       - title: TON
